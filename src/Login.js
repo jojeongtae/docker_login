@@ -13,8 +13,7 @@ function Login({ onLogin }) {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            //응애
-
+            
             const response = await apiClient.post("/login",
                 new URLSearchParams({ username, password }));
             const role=response.data.role;
@@ -44,7 +43,15 @@ function Login({ onLogin }) {
             // setMessage("Join failed");
         }
     };
-
+    const handleGoogleLogin = () =>{
+        window.location.href = "/api/google";  //이렇게 쓰면 주소표시줄만 바꿈
+    }
+    const handleKakaoLogin = () =>{
+        window.location.href = "/api/kakao";
+    }
+    const handleNaverLogin = () =>{
+        window.location.href = "/api/naver";
+    }
     return (
         <div>
             <form>
@@ -66,6 +73,9 @@ function Login({ onLogin }) {
                 <button type="button" name="join" onClick={handleJoin}>Join</button>
             </form>
             {message && <p>{message}</p>}
+            <button onClick={handleNaverLogin}>네이버 로그인</button>
+            <button onClick={handleGoogleLogin}>구글 로그인</button>
+            <button onClick={handleKakaoLogin}>카카오 로그인</button>
         </div>
     );
 }
